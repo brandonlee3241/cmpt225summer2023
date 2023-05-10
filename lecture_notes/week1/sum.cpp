@@ -143,7 +143,7 @@ void test_sum_array3()
 // sums the elements between two iterators (pointers). The third argument is the
 // starting value of the sum.
 //
-double sum_array4(double *arr, int size)
+double sum_array4(double *arr, int size)    
 {
     return accumulate(arr, arr + size, 0);
 }
@@ -212,7 +212,7 @@ void test_sum_vec1()
 double sum_vec2(const vector<double> &v)
 {
     double total = 0;
-    for (double x : v)
+    for (double x : v) // for each double, x, in v
     {
         total += x;
     }
@@ -239,7 +239,10 @@ void test_sum_vec2()
 //
 double sum_vec3(const vector<double> &v)
 {
-    return accumulate(v.begin(), v.end(), 0);
+    return accumulate(v.begin(), v.end(), 0); // .begin() returns pointer to the start of the arr.
+    // end() returns pointer to the end of the array
+    //accumulate from the start to the end, with sum starting at 0
+    
 }
 
 void test_sum_vec3()
