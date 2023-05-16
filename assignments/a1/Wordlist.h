@@ -51,6 +51,19 @@ class Wordlist : public Wordlist_base
         int count;
         Node *next;
     };
+    
+    private:
+        string* dynamic_array;
+    public:
+        Wordlist(){
+            cout << "Constructed";
+        };
+        Wordlist() = default;
+
+        ~Wordlist(){
+            delete[] dynamic_array;
+        }
+
 
     //
     // ... your code goes here ...
