@@ -1,9 +1,9 @@
 ## Assignment 1: Word Lists
 
-In this assignment, create a class called `Wordlist` that counts how many times
-each word appears in a file. The class *must* use a **singly-linked list** as
-its underlying representation --- vectors, arrays, or other container data
-structures are *not* allowed.
+In this assignment, your task is to create a class called `Wordlist` that counts
+how many times each word appears in a file. The class *must* use a
+**singly-linked list** as its underlying representation --- vectors, arrays, or
+other container data structures are *not* allowed.
 
 When it's done, you'll be able to write code like this:
 
@@ -27,13 +27,13 @@ Number of different words: 25670
 All the code you'll submit for this assignment goes in [Wordlist.h](Wordlist.h).
 *Don't* put `main` in [Wordlist.h](Wordlist.h). Instead, put `main` in
 [a1_main.cpp](a1_main.cpp), along with all the code you need to test your
-`Wordlist` class. 
+`Wordlist` class.
 
-Use [a1_main.cpp](a1_main.cpp) (includes [Wordlist.h](Wordlist.h)) for testing
-your code.
+Use [a1_main.cpp](a1_main.cpp) (it includes [Wordlist.h](Wordlist.h)) for
+testing your code.
  
-> **Note:** You can download all this files in a single .zip archive from the
-> [Github repository for the course](https://github.com/tjd1234/cmpt225summer2023).
+> **Note** You can download all the files for this assignment in a single .zip
+> archive from the [Github repository for the course](https://github.com/tjd1234/cmpt225summer2023). 
 > Click on the green "Code" button, and then click on "Download ZIP".
 
 
@@ -58,7 +58,7 @@ publicly inherit from `Wordlist_base`, and use the `Node` `struct` (given in
 > [Wordlist.h](Wordlist.h).
 
 
-### Implement a Default Constructor and Destructor
+### Implement Constructors, and a Destructor
 
 In addition to the methods listed in `Wordlist_base`, in `Wordlist` write a
 *default constructor* that takes no parameters and creates an empty `Wordlist`
@@ -70,15 +70,21 @@ Wordlist lst;
 // ... lst is an empty Wordlist object ...
 ```
 
-Also write a destructor for `Wordlist` that de-allocates all the nodes in the
-list. In `Wordlist_base`, the destructor is called `~Wordlist_base()`, and the
-one you write for `Wordlist` should be called `~Wordlist()`.
+Also, write a *constructor* that takes the name of a file as input, and adds all
+the words in that file to the `Wordlist` object. Read the words from the file
+using C++'s standard `<<` operator (the first example at the top of this
+assignment shows how this constructor should work, and what its output ought to
+be).
+
+Write a destructor for `Wordlist` that de-allocates all the nodes in the list.
+In `Wordlist_base`, the destructor is called `~Wordlist_base()`, and the one you
+write for `Wordlist` should be called `~Wordlist()`.
 
 
 ### Testing Your Code
 
-You can use the `test_read()` function in [a1_main.cpp](a1_main.cpp) to test
-your code. For example, [small.txt](small.txt) contains the following text:
+Use the `test_read()` function in [a1_main.cpp](a1_main.cpp) to test your code.
+For example, [small.txt](small.txt) contains the following text:
 
 ```
 This is
@@ -88,7 +94,7 @@ a test?
 
 ```
 
-If you run the following code:
+When you run this code:
 
 ```cpp
 // ...
@@ -113,7 +119,7 @@ int main()
 }
 ```
 
-Then the output for [small.txt](small.txt) is:
+The output for [small.txt](small.txt) should be:
 
 ```
 ❯ ./a1_main < small.txt
@@ -136,9 +142,9 @@ Notice that *case matters*, e.g. `"This"` and `"this"` are counted as
 counted as different.
 
 > **Note** Real life programs would likely strip out punctuation and ignore
-> case, but in this assignment we want to count every word exactly as it appears
-> in the file. This makes the code a littler simpler, and more consistent across
-> students.
+> letter case, but in this assignment we want to count every word exactly as it
+> appears in the file. This makes the code a littler simpler, and more
+> consistent across students.
 
 Here's another example using the larger file
 [tiny_shakespeare.txt](tiny_shakespeare.txt):
@@ -245,14 +251,14 @@ Be sure to test your program, and run it with `valgrind`, before submitting it.
 
 ## Marking Scheme
 
-### Methods: 26 marks
+### Methods: 22 marks
 
-- **2 marks** for each of the 11 virtual methods in `Wordlist_base` that is
+- **2 marks** for each of the 9 virtual methods in `Wordlist_base` that is
   implemented correctly.
 - **2 marks** for a default constructor that creates an empty `Wordlist` object.
 - **2 marks** for a constructor that takes the name of a file as input, and adds
-  all the words in that file to a `Wordlist` object. Read the words from the
-  file using C++'s standard `<<` operator (the first example at the top of this
+  all the words in that file to the `Wordlist`. Read the words from the file
+  using C++'s standard `<<` operator (the first example at the top of this
   assignment shows how this constructor should work, and what its output ought
   to be).
 
