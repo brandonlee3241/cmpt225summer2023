@@ -16,6 +16,7 @@ string quote(string s)
 
 class List
 {
+    // private
     struct Node
     {
         string data;
@@ -115,22 +116,17 @@ public:
 
 int main()
 {
-    List lst; //create List object named lst
+    List lst;
     assert(lst.empty());
     assert(lst.size() == 0);
 
     // add a string
-    lst.push_front("hello"); //adds a string using the push_front method in the lst object
+    lst.push_front("hello");
     assert(!lst.empty());
     assert(lst.size() == 1);
-    lst.print(); // prints 
+    lst.print();
 
     // add another string
     lst.push_front("world");
-    assert(!lst.empty());
-    assert(lst.size() == 2);
     lst.print();
-
-    string s = lst.pop_front();
-    cout <<"popped" << quote(s)<<endl;
 }
