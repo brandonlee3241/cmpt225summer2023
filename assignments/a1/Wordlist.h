@@ -14,7 +14,7 @@
 //
 // Statement of Originality
 // ------------------------
-//
+
 // All the code and comments below are my own original work. For any non-
 // original work, I have provided citations in the comments with enough
 // detail so that someone can see the exact source and extent of the
@@ -50,24 +50,79 @@ class Wordlist : public Wordlist_base
         string word;
         int count;
         Node *next;
+        Node(const string& w, int c, Node* n) : word(w), count(c), next(n) {}
+
     };
     
     private:
-        string* dynamic_array;
+        Node* head; // head pointer 
     public:
-        Wordlist(){
-            cout << "Constructed";
-        };
-        Wordlist() = default;
-
-        ~Wordlist(){
-            delete[] dynamic_array;
+        Wordlist(){ // empty lst
+            head = nullptr;
+        }
+        Wordlist(string &filename){ //populate list
+            ifstream file(filename);
+        }
+        Wordlist() = default; // set default constructor
+        ~Wordlist(){ //update later;
         }
 
 
+        //methods:
+
+        
+        int get_count(const string &w)const override{
+            Node* p = head; //temp pointer to traverse
+
+            while(p->word != w){ // this will walk the pointer until we reach the correct word
+                p = p->next;
+                if(!p){
+                    return 0;
+                }
+            }
+            return p->count;
+        }
+        
+        void add_word(const string &w)override{
+            Node* p = head;
+            if(head == nullptr){ // checks if list is empty, if so make a new node and set it as the head;
+                head = new Node(w,1,nullptr);
+                return;
+            }
+             //traverse the current list looking for where it belongs
+            while(p->word < w){
+                if(p->word == w){
+                    p->count +=1;
+                    return;
+                }
+                p = p->next;
+            }
+            p->next = new Node(w,1,p->next); // p will now point to our new node, and our new node will point to where p was pointing to before
+        }
+
+        string most_frequent()const override{
+            Node* p = head; // p will be used to traverse the list
+            Node* tmp = nullptr; //tmp will be used to keep track of the node that contains the most frequent word
+            int max=0; // will be used for comparisons
+            while(p){
+                if(p->count > max){
+                    tmp = p;
+                    max = tmp->count;
+                }
+                p = p->next;
+            }
+            if(tmp){
+                return tmp->word;
+            }
+            else{
+                return ""; //returns null if list is empty;
+            }
+            
+        }
+
     //
     // ... your code goes here ...
-    //
+
 
     //
     // ... you can write helper methods if you need them ...
