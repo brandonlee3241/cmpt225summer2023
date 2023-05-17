@@ -29,15 +29,18 @@ class List
     Node *head = nullptr;
 
 public:
-    bool empty() const
+
+    //functions in a class are called methods
+    //public functions can access private attributes
+    bool empty() const //const method tells compiler it will not modify anything
     {
         return head == nullptr;
     }
 
-    int size() const
+    int size() const // const size tells that it will not modify any private attributes
     {
         int count = 0;
-        Node *p = head;
+        Node *p = head; // p can be manipulated because it is  alocal variable
         while (p != nullptr)
         {
             count++;
@@ -46,7 +49,7 @@ public:
         return count;
     }
 
-    void print() const
+    void print() const // does not modify any private objects
     {
         cout << "List: ";
         Node *p = head;
@@ -83,7 +86,7 @@ public:
     //
     // return a copy the string in the first node in the list
     //
-    string peek_front() const
+    string peek_front() const //returns what is at the front of the list
     {
         assert(!empty());
         return head->data;
@@ -103,7 +106,7 @@ public:
     //
     // destructor
     //
-    ~List()
+    ~List() // cannot explicity call destructor, will be automatically called when the list is done
     {
         clear();
     }
@@ -112,19 +115,22 @@ public:
 
 int main()
 {
-    List lst;
+    List lst; //create List object named lst
     assert(lst.empty());
     assert(lst.size() == 0);
 
     // add a string
-    lst.push_front("hello");
+    lst.push_front("hello"); //adds a string using the push_front method in the lst object
     assert(!lst.empty());
     assert(lst.size() == 1);
-    lst.print();
+    lst.print(); // prints 
 
     // add another string
     lst.push_front("world");
     assert(!lst.empty());
     assert(lst.size() == 2);
     lst.print();
+
+    string s = lst.pop_front();
+    cout <<"popped" << quote(s)<<endl;
 }
