@@ -119,6 +119,26 @@ class Wordlist : public Wordlist_base
             }
             
         }
+        int num_different_words()const override{
+            int count=0;
+            Node* p = head;
+            while(p){
+                count+=1;
+                p = p->next;
+            }
+            return count; // accounts for if head == null
+        }
+        int num_singletons()const override{
+            int count=0;
+            Node* p = head;
+            while(p){
+                if(p->count == 1){
+                    count+=1;
+                }
+                p = p->next;
+            }
+            return count;
+        }
 
     //
     // ... your code goes here ...
