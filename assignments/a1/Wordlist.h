@@ -82,7 +82,6 @@ class Wordlist : public Wordlist_base
             }
             return p->count;
         }
-        
         void add_word(const string &w)override{
             Node* p = head;
             if(head == nullptr){ // checks if list is empty, if so make a new node and set it as the head;
@@ -99,7 +98,6 @@ class Wordlist : public Wordlist_base
             }
             p->next = new Node(w,1,p->next); // p will now point to our new node, and our new node will point to where p was pointing to before
         }
-
         string most_frequent()const override{
             Node* p = head; // p will be used to traverse the list
             Node* tmp = nullptr; //tmp will be used to keep track of the node that contains the most frequent word
@@ -139,7 +137,33 @@ class Wordlist : public Wordlist_base
             }
             return count;
         }
-
+        bool is_sorted()const override{
+            Node* p = head;
+            while(p){
+                if(p->next && p->next->word < p->word){
+                    return false;
+                }
+                p = p->next;
+            }
+            return true;
+        }
+        int total_words()const override{
+            int count = 0;
+            Node* p = head;
+            while(p){
+                count+=p->count;
+                p = p->next;
+            }
+            return count;
+        }
+        void print_words()const override{
+            Node* p = head;
+            int count =0;
+            while(p){
+                count+=1;
+                cout << count << ". {"<<
+            }
+        }
     //
     // ... your code goes here ...
 
