@@ -7,9 +7,9 @@
 // Student Info
 // ------------
 //
-// Name : <put your full name here!>
-// St.# : <put your full SFU student number here>
-// Email: <put your SFU email address here>
+// Name : <Brandon Jarrett Lee>
+// St.# : <301411031>
+// Email: <bjl12@sfu.ca>
 //
 //
 // Statement of Originality
@@ -63,7 +63,7 @@ class Wordlist : public Wordlist_base
             }
         }
 
-        ~Wordlist(){
+        ~Wordlist(){ // destructor to delete all nodes in list
             Node* tmp = head;
             while(head){
                 tmp = head;
@@ -74,16 +74,22 @@ class Wordlist : public Wordlist_base
 
 
         //methods:
+        // The basis for most of these methods is to use one temporary node pointer to traverse the list 
+        // until we reach the desired location or node. Many of the methods will for the most part follow 
+        // the same structure, as most of the methods are a test of our ability to access data in a singly linked
+        // list, so I will only comment the first one in detail, and then will add comments 
+        // where there are differences.
+        // 
 
         
         int get_count(const string &w)const override{
-            Node* p = head; //temp pointer to traverse
-            if(p == nullptr){
+            Node* p = head; //temp pointer to traverse the list
+            if(p == nullptr){ // checks if list is empty and returns 0 if so
                 return 0;
             }
-            while(p->word != w){ // this will walk the pointer until we reach the correct word
+            while(p->word != w){ // this will walk the pointer until we reach the desired word or the end of the list
                 p = p->next;
-                if(!p){
+                if(!p){ // if we reach the end of the list and the word is not found, return 0
                     return 0;
                 }
             }
@@ -91,33 +97,34 @@ class Wordlist : public Wordlist_base
         }
         
         void add_word(const string &w)override{
-            Node* p = head;
-            Node* tmp =nullptr;
-            if(p == nullptr){ // checks if list is empty, if so make a new node and set it as the head;
+            Node* p = head; 
+            Node* tmp =nullptr; // tmp will be used to keep track of the node before the node we want to insert
+            if(p == nullptr){ // checks if list is empty, if so make a new node and set it as the head
                 head = new Node(w,1,nullptr);
                 return;
             }
-            while(p!=nullptr && p->word.compare(w)<0){
+            while(p!=nullptr && p->word.compare(w)<0){ // this will walk the pointer until we reach the correct spot to insert the word
                 tmp = p;
                 p = p->next;
             }
-            if(p && p->word == w){
+            if(p && p->word == w){ // if the word is already in the list, increment the count and return
                 p->count +=1;
                 return;
             }
-            Node* newNode = new Node(w,1,p);
-            if(tmp){
+            Node* newNode = new Node(w,1,p); 
+            if(tmp){ // if tmp is not null, we are not inserting at the head
                 tmp->next = newNode;
             }
-            else{
+            else{// if tmp is null, we are inserting at the head
                 head = newNode;
             }
 
         }
+
         string most_frequent()const override{
-            Node* p = head; // p will be used to traverse the list
-            Node* tmp = nullptr; //tmp will be used to keep track of the node that contains the most frequent word
-            int max=0; // will be used for comparisons
+            Node* p = head; 
+            Node* tmp = nullptr; //tmp will be used to keep track of the node with the highest count
+            int max=0; // max will be used to keep track of the highest count
             while(p){
                 if(p->count > max){
                     tmp = p;
@@ -125,7 +132,7 @@ class Wordlist : public Wordlist_base
                 }
                 p = p->next;
             }
-            if(tmp){
+            if(tmp){ // if tmp is not null, return the word with the highest count
                 return tmp->word;
             }
             else{
@@ -133,15 +140,17 @@ class Wordlist : public Wordlist_base
             }
             
         }
+
         int num_different_words()const override{
-            int count=0;
+            int count=0; // initialize to 0 in case list is empty
             Node* p = head;
-            while(p){
+            while(p){ // walks the pointer to the end of the list and increments count
                 count+=1;
                 p = p->next;
             }
-            return count; // accounts for if head == null
+            return count;
         }
+
         int num_singletons()const override{
             int count=0;
             Node* p = head;
@@ -153,16 +162,18 @@ class Wordlist : public Wordlist_base
             }
             return count;
         }
+
         bool is_sorted()const override{
             Node* p = head;
             while(p){
-                if(p->next && p->next->word < p->word){
+                if(p->next && p->next->word < p->word){ // checks if the next word is less than the current word
                     return false;
                 }
                 p = p->next;
             }
             return true;
         }
+
         int total_words()const override{
             int count = 0;
             Node* p = head;
@@ -172,6 +183,7 @@ class Wordlist : public Wordlist_base
             }
             return count;
         }
+
         void print_words()const override{
             Node* p = head;
             int count =0;
@@ -181,25 +193,6 @@ class Wordlist : public Wordlist_base
                 p = p->next;
             }
         }
-    //
-    // ... your code goes here ...
+    
 
-
-    //
-    // ... you can write helper methods if you need them ...
-    //
-
-    //
-    // ... write a default constructor that creates an empty Wordlist ...
-    //
-
-}; // class Wordlist
-
-//
-// ... you can write helper functions here (or before Wordlist) if you need them
-// ...
-//
-
-//
-// ... write functions to test every method of Wordlist ...
-//
+}; 

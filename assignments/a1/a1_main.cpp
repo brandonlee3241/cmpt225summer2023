@@ -22,6 +22,7 @@ void test_read()
     string w;
     while (cin >> w)
     {
+       // cout << "read word: " << w << endl;
         lst.add_word(w);
     }
 
