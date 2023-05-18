@@ -7,9 +7,9 @@
 // Student Info
 // ------------
 //
-// Name : <Brandon Jarrett Lee>
-// St.# : <301411031>
-// Email: <bjl12@sfu.ca>
+// Name : <Brandon Lee>
+// St.# : <redacted>
+// Email: <redacted>
 //
 //
 // Statement of Originality
