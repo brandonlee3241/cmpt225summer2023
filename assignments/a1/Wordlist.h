@@ -39,12 +39,6 @@ using namespace std;
 
 class Wordlist : public Wordlist_base
 {
-    //
-    // Use this Node to implement the singly-linked list for the word list. You
-    // can *add* extra variables/methods/features to this struct if you like,
-    // but you must keep its name the same, and also keep the word, count, and
-    // next variables as defined.
-    //
     struct Node
     {
         string word;
@@ -56,15 +50,26 @@ class Wordlist : public Wordlist_base
     
     private:
         Node* head; // head pointer 
+        string word; 
     public:
-        Wordlist(){ // empty lst
+        Wordlist(){ // empty list constructor
             head = nullptr;
         }
-        Wordlist(string &filename){ //populate list
+
+        Wordlist(string &filename){ //populate list with words from file
             ifstream file(filename);
+            while (file >>word){
+                add_word(word);
+            }
         }
-        Wordlist() = default; // set default constructor
-        ~Wordlist(){ //update later;
+
+        ~Wordlist(){
+            Node* tmp = head;
+            while(head){
+                tmp = head;
+                head = head->next;
+                delete(tmp);
+            }
         }
 
 
@@ -73,7 +78,9 @@ class Wordlist : public Wordlist_base
         
         int get_count(const string &w)const override{
             Node* p = head; //temp pointer to traverse
-
+            if(p == nullptr){
+                return 0;
+            }
             while(p->word != w){ // this will walk the pointer until we reach the correct word
                 p = p->next;
                 if(!p){
@@ -82,21 +89,30 @@ class Wordlist : public Wordlist_base
             }
             return p->count;
         }
+        
         void add_word(const string &w)override{
             Node* p = head;
-            if(head == nullptr){ // checks if list is empty, if so make a new node and set it as the head;
+            Node* tmp =nullptr;
+            if(p == nullptr){ // checks if list is empty, if so make a new node and set it as the head;
                 head = new Node(w,1,nullptr);
                 return;
             }
-             //traverse the current list looking for where it belongs
-            while(p->word < w){
-                if(p->word == w){
-                    p->count +=1;
-                    return;
-                }
+            while(p!=nullptr && p->word.compare(w)<0){
+                tmp = p;
                 p = p->next;
             }
-            p->next = new Node(w,1,p->next); // p will now point to our new node, and our new node will point to where p was pointing to before
+            if(p && p->word == w){
+                p->count +=1;
+                return;
+            }
+            Node* newNode = new Node(w,1,p);
+            if(tmp){
+                tmp->next = newNode;
+            }
+            else{
+                head = newNode;
+            }
+
         }
         string most_frequent()const override{
             Node* p = head; // p will be used to traverse the list
@@ -161,7 +177,8 @@ class Wordlist : public Wordlist_base
             int count =0;
             while(p){
                 count+=1;
-                cout << count << ". {"<<
+                cout << count << ". {"<<p->word<<", "<<p->count << "}"<<endl;
+                p = p->next;
             }
         }
     //
