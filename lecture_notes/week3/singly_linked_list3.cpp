@@ -33,6 +33,46 @@ class List
     //
     Node *head = nullptr;
 
+    // Returns a pointer to the first node in the list that contains s. If no
+    // node contains s, returns nullptr.
+    Node *walk_to(const string &s) const
+    {
+        Node *p = head;
+        while (p != nullptr)
+        {
+            if (p->data == s)
+            {
+                return p;
+            }
+            p = p->next;
+        }
+        // return nullptr if we didn't find s
+        return nullptr;
+    }
+
+    // Returns a pointer to the ith node in the list.
+    Node *walk_to(int i) const
+    {
+        Node *p = head;
+        for (int j = 0; j < i; j++)
+        {
+            p = p->next;
+        }
+        return p;
+    }
+
+    // Remove the node after p from the list. Can't delete the first element:
+    // use pop_front for that.
+    //
+    // Assume p points to a valid node in the list.
+    void remove_after(Node *p)
+    {
+        assert(p != nullptr);
+        Node *n = p->next;
+        p->next = n->next;
+        delete n;
+    }
+
 public:
     //
     // Tests if the list is empty.
@@ -161,17 +201,21 @@ public:
     //
     bool contains(const string &s) const
     {
-        Node *p = head;
-        while (p != nullptr)
-        {
-            if (p->data == s)
-            {
-                return true;
-            }
-            p = p->next;
-        }
-        return false;
+        return walk_to(s) != nullptr;
     }
+
+    // {
+    //     Node *p = head;
+    //     while (p != nullptr)
+    //     {
+    //         if (p->data == s)
+    //         {
+    //             return true;
+    //         }
+    //         p = p->next;
+    //     }
+    //     return false;
+    // }
 
     //
     // Puts s at the front of the list as long as s does not occur anywhere else
@@ -184,6 +228,41 @@ public:
             push_front(s);
         }
     }
+
+    //
+    // Remove the node at location i.
+    //
+    void remove(int i)
+    {
+        assert(i >= 0 && i < size());
+        if (i == 0)
+        {
+            pop_front();
+        }
+        else
+        {
+            Node *p = walk_to(i - 1);
+            remove_after(p);
+        }
+    }
+
+    //
+    // Reverse the order of the elements of the list.
+    //
+    void reverse()
+    {
+        Node *p = head;
+        Node *q = nullptr;
+        while (p != nullptr)
+        {
+            Node *r = p->next;
+            p->next = q;
+            q = p;
+            p = r;
+        }
+        head = q;
+    }
+
 }; // List
 
 int main()
@@ -218,6 +297,42 @@ int main()
 
     lst1.push_front_new("hello");
     assert(lst1.size() == 2);
+
+    // test reverse
+    lst1.clear();
+    assert(lst1.empty());
+    assert(lst1.size() == 0);
+    lst1.reverse();
+    assert(lst1.empty());
+    assert(lst1.size() == 0);
+
+    lst1.push_front("hello");
+    assert(lst1.size() == 1);
+    assert(lst1.peek_front() == "hello");
+    lst1.reverse();
+    assert(lst1.size() == 1);
+    assert(lst1.peek_front() == "hello");
+
+    lst1.push_front("world");
+    lst1.reverse();
+    assert(lst1.size() == 2);
+    assert(lst1.peek_front() == "hello");
+    lst1.pop_front();
+    assert(lst1.peek_front() == "world");
+
+    lst1.clear();
+    lst1.push_front("A");
+    lst1.push_front("B");
+    lst1.push_front("C");
+    lst1.reverse();
+    assert(lst1.size() == 3);
+    assert(lst1.peek_front() == "A");
+    lst1.pop_front();
+    assert(lst1.peek_front() == "B");
+    lst1.pop_front();
+    assert(lst1.peek_front() == "C");
+    lst1.pop_front();
+    assert(lst1.empty());
 
     cout << "All tests passed!\n";
 } // main
