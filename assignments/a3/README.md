@@ -336,7 +336,7 @@ announcements were made):
     [Queue_base.h](Queue_base.h).
 
 - Implement a class called `JingleNet` that stores the 5 queues. The details of
-  this class is up to you. Use it in a sensible way that makes your program
+  this class are up to you. Use it in a sensible way that makes your program
   easier to understand. For instance, `JingleNet` could have a method for each
   JingleNet command above.
 
@@ -403,7 +403,7 @@ g++ -std=c++17 -Wall -Wextra -Werror -Wfatal-errors -Wno-sign-compare -Wnon-virt
   work correctly.
 - **2 marks**: All the methods in `Queue` meet the performance requirements
   listed in [Queue_base.h](Queue_base.h).
-- **3 marks** The `Queue` class is implemented using either a singly-linked or
+- **3 marks**: The `Queue` class is implemented using either a singly-linked or
   doubly-linked list. that you coded yourself. Do **not** use arrays, vectors,
   or other containers to implement `Queue`.
 

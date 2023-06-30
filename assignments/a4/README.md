@@ -1,12 +1,6 @@
 ## Assignment 4: Sorting
 
-> **WARNING** This is a draft! Any part of this, even the entire, could change
-> in any way at any time. Do not assume this will actually be assignment 3.
-
-------
-
 > The ability to destroy a planet is insignificant next to the power of sorting.
->
 > -- Darth Vader (if he was a computer scientist)
 
 In this assignment, your task is to run performance experiments on 7 sorting
@@ -28,10 +22,10 @@ in any way: all the sorting-related code you write goes in
 "a4_base.h"`. No other #includes are allowed.
 
 *iquick* sort is regular quick sort, except when the sub-vectors being sorted
-are shorter than some predetermined threshold length, insertion sort is used to
-sort them instead of quick sort. If you choose a good threshold length, you can
-get better average-time performance than regular quick sort. Do some
-experimentation to find the best threshold length for *iquick* sort!
+are shorter than some predetermined threshold length, insertion sort is used instead
+of quick sort. If you choose a good threshold length, you can get better
+average-time performance than regular quick sort. Do some experimentation to
+find the best threshold length for *iquick* sort!
 
 Test your implementations using [test_sorts.cpp](test_sorts.cpp). You can modify
 that file in any way you like (it is *not* one of the submitted files for this
@@ -172,7 +166,7 @@ Google Sheets as a CSV file.
 ## Visualizing the Data in a Spreadsheet
 
 Using Excel or Google Sheets, create a table of all the data you generated. Here
-us an example of what the first four rows of the table ought to look like (the
+is an example of what the first four rows of the table ought to look like (the
 numbers in your table might be different):
 
 | **Name**    | **N** | **Comparisons** | **CPU Seconds** |
@@ -285,7 +279,7 @@ code for speed.
 - **A score of 0** if valgrind reports any memory leaks, or other errors.
 - **A score of 0** if you *don't* include the "Statement of Originality", or it
   is modified in any way.
-- **A score of 0** if use code from some other source (e.g. the web, the
+- **A score of 0** if you use code from some other source (e.g. the web, the
   textbook, ChatGPT, ...) *without* citing its source.
 - **A score of 0** if you submit a "wrong" non-working file, and then *after the
   due date* submit the "right" file. If you can provide evidence that you

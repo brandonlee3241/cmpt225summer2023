@@ -29,8 +29,10 @@
 //
 #include "Announcement.h"
 #include "JingleNet_announcer.h"
+#include "Queue_base.h"
 #include <fstream>
 #include <iostream>
+#include <stdexcept>
 #include <string>
 
 using namespace std;
